@@ -1,0 +1,30 @@
+# Maven build output
+target/
+
+# Compiled native library
+lib/*.so
+lib/*.dylib
+lib/*.dll
+
+# IDE project files
+.idea/
+*.iml
+.vscode/
+*.classpath
+*.project
+.settings/
+
+# OS-generated files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Log files
+*.log
+hs_err_pid*.log
+
+# Patch files (local development only)
+*.patch
+
+# Runtime natives compiled locally
+lib/libsysmetrics.so
