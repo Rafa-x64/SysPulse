@@ -2,7 +2,7 @@
 
 # SysPulse
 
-**A real-time Linux system monitor built with Java 25, JavaFX 23 and a native C backend**
+**Un monitor de sistema en tiempo real para Linux construido con Java 25, JavaFX 23 y un backend nativo en C**
 
 ![SysPulse Dashboard](preview.png)
 
@@ -16,45 +16,45 @@
 
 ---
 
-## What is SysPulse?
+## ¿Qué es SysPulse?
 
-SysPulse is a lightweight, native-feeling desktop dashboard for Linux that gives you a live pulse on your machine. It reads system data directly from the Linux kernel (`/proc`, `/sys`, disk stats) through a native C shared library and surfaces everything in a clean JavaFX interface with real-time animated charts.
+SysPulse es un panel de escritorio ligero y nativo para Linux que te da un pulso en tiempo real de tu máquina. Lee los datos directamente desde el Kernel de Linux (`/proc`, `/sys`, estadísticas de disco) a través de una librería nativa compartida escrita en C y muestra todo en una interfaz limpia en JavaFX con gráficos animados en tiempo real.
 
-No bloat. No Electron. No background daemons. Just raw kernel data, rendered at 60 fps.
+Sin sobrecarga. Sin Electron. Sin daemons en segundo plano. Solo datos puros del kernel, renderizados a 60 fps.
 
-### What it monitors
+### Qué monitorea
 
-| Metric | Source | Update rate |
-|--------|--------|-------------|
-| CPU usage | `/proc/stat` delta | 1 s |
-| RAM usage | `/proc/meminfo` | 1 s |
-| Disk I/O activity | `/proc/diskstats` delta | 1 s |
-| GPU usage | `/sys/class/drm/...` | 1 s |
-| Running processes | `/proc/<pid>/stat` | 1 s |
+| Métrica | Origen | Frecuencia de actualización |
+|:---|:---|:---|
+| Uso de CPU | Delta de `/proc/stat` | 1 s |
+| Uso de RAM | `/proc/meminfo` | 1 s |
+| Actividad de Disco I/O | Delta de `/proc/diskstats` | 1 s |
+| Uso de GPU | `/sys/class/drm/...` | 1 s |
+| Procesos activos | `/proc/<pid>/stat` | 1 s |
 
-### Process management
+### Administración de procesos
 
-Select any process in the table and use the bottom toolbar to:
+Selecciona cualquier proceso de la tabla y utiliza la barra de herramientas inferior para:
 
-- **Info** - view PID, PPID, memory and thread count
-- **Terminate** - send SIGTERM (graceful shutdown)
-- **Kill -9** - send SIGKILL (force kill)
-- **Suspend** - send SIGSTOP (pause process)
-- **Resume** - send SIGCONT (resume process)
+- **Info** - ver el PID, PPID, memoria y cantidad de hilos de ejecución.
+- **Terminar** - enviar la señal `SIGTERM` (cierre elegante).
+- **Kill -9** - enviar la señal `SIGKILL` (forzar el cierre del proceso).
+- **Suspender** - enviar la señal `SIGSTOP` (pausar el proceso).
+- **Reanudar** - enviar la señal `SIGCONT` (continuar el proceso pausado).
 
 ---
 
-## Requirements
+## Requisitos
 
-| Dependency | Version | Link |
-|------------|---------|------|
+| Dependencia | Versión | Enlace |
+|:---|:---|:---|
 | Java (JDK) | 25 | [openjdk.org](https://openjdk.org/projects/jdk/25/) |
 | Apache Maven | 3.9+ | [maven.apache.org](https://maven.apache.org/download.cgi) |
-| GCC | Any modern version | [gcc.gnu.org](https://gcc.gnu.org/) |
-| Linux kernel | 5.x+ | - |
-| JavaFX | 23.0.1 (pulled by Maven) | [openjfx.io](https://openjfx.io/) |
+| GCC | Cualquier versión moderna | [gcc.gnu.org](https://gcc.gnu.org/) |
+| Kernel de Linux | 5.x+ | - |
+| JavaFX | 23.0.1 (descargado por Maven) | [openjfx.io](https://openjfx.io/) |
 
-> **GPU monitoring** works out of the box on AMD cards via `gpu_busy_percent` and on Intel integrated graphics via frequency-based estimation. NVIDIA is not currently supported.
+> ℹ️ El **Monitoreo de GPU** funciona de forma nativa en tarjetas gráficas AMD mediante `gpu_busy_percent` y en gráficas integradas Intel mediante una estimación basada en frecuencia. Las tarjetas NVIDIA no están soportadas actualmente.
 
 ---
 
@@ -125,32 +125,32 @@ Esta es la carpeta completa que puedes comprimir en `.rar` o `.tar.gz` para comp
 
 ---
 
-## Project structure
+## Estructura del proyecto
 
 ```
 SysPulse/
 ├── src/
 │   └── main/
 │       ├── c/
-│       │   └── sys_metrics.c          # Native library: reads /proc and /sys
+│       │   └── sys_metrics.c          # Librería nativa C: lee /proc y /sys
 │       ├── java/com/rafa/
-│       │   ├── App.java               # JavaFX entry point
+│       │   ├── App.java               # Punto de entrada de la aplicación JavaFX
 │       │   ├── bridge/
-│       │   │   └── SystemBridge.java  # FFI bridge (Panama API)
+│       │   │   └── SystemBridge.java  # Puente FFI (Panama API)
 │       │   ├── model/
-│       │   │   ├── SystemMetrics.java # Immutable metrics snapshot
+│       │   │   ├── SystemMetrics.java # Captura inmutable de métricas
 │       │   │   ├── ProcessSnapshot.java
 │       │   │   └── RawCpuTimes.java
 │       │   ├── service/
-│       │   │   └── SystemMonitorService.java  # Polling scheduler
+│       │   │   └── SystemMonitorService.java  # Planificador y recolector (Virtual Threads)
 │       │   ├── view/
-│       │   │   ├── DashboardView.java         # UI layout and wiring
-│       │   │   └── CpuChartCanvas.java        # Animated line chart canvas
+│       │   │   ├── DashboardView.java         # Diseño y conexión de la UI
+│       │   │   └── CpuChartCanvas.java        # Canvas para gráficos de líneas animados
 │       │   └── viewmodel/
-│       │       └── DashboardViewModel.java    # Observable properties
+│       │       └── DashboardViewModel.java    # Propiedades observables de la UI
 │       └── resources/com/rafa/
-│           └── styles.css             # Nord-themed dark stylesheet
-├── lib/                               # Compiled .so goes here (git-ignored)
+│           └── styles.css             # Estilo oscuro con temática Nord
+├── lib/                               # La librería compilada .so se guarda aquí (git-ignored)
 ├── pom.xml
 ├── LICENSE
 └── README.md
@@ -158,42 +158,42 @@ SysPulse/
 
 ---
 
-## Architecture
+## Arquitectura
 
-SysPulse uses the [Java Foreign Function & Memory API](https://openjdk.org/jeps/454) (Project Panama) introduced in Java 22 to call the native C library without JNI boilerplate. The data flow is:
+SysPulse utiliza la [API de Funciones y Memoria Extranjera de Java](https://openjdk.org/jeps/454) (Proyecto Panama) introducida en Java 22 para llamar a la librería nativa escrita en C sin la sobrecarga ni el código boilerplate de JNI. El flujo de datos es:
 
 ```
-Linux kernel (/proc, /sys)
+Kernel de Linux (/proc, /sys)
         |
-  sys_metrics.c  (shared library compiled by GCC)
+  sys_metrics.c  (librería compartida compilada por GCC)
         |
-  SystemBridge.java  (Panama FFI downcall handles)
+  SystemBridge.java  (manejadores de llamadas Panama FFI)
         |
-  SystemMonitorService.java  (virtual-thread scheduler, 1 s interval)
+  SystemMonitorService.java  (planificador sobre hilos virtuales, intervalo de 1 s)
         |
-  DashboardViewModel.java  (JavaFX ObservableProperties)
+  DashboardViewModel.java  (propiedades observables de JavaFX)
         |
-  DashboardView.java  (UI, animated charts, process table)
+  DashboardView.java  (UI, gráficos animados, tabla de procesos)
 ```
 
-The scheduler runs on a [virtual thread](https://openjdk.org/jeps/444), keeping the platform thread pool free.
+El programador se ejecuta sobre un **hilo virtual (Virtual Thread)**, manteniendo libre el pool de hilos de la plataforma.
 
 ---
 
-## Contributing
+## Contribuciones
 
-Pull requests are welcome. To propose a change:
+Las contribuciones y Pull Requests son completamente bienvenidos. Para proponer un cambio:
 
-1. Fork the repository
-2. Create a branch (`git checkout -b feature/your-feature`)
-3. Commit your changes (`git commit -m 'Add your feature'`)
-4. Push to the branch (`git push origin feature/your-feature`)
-5. Open a pull request against `main`
+1. Realiza un Fork del repositorio.
+2. Crea una rama para tu característica (`git checkout -b feature/tu-caracteristica`).
+3. Confirma tus cambios (`git commit -m 'Agregar nueva característica'`).
+4. Sube los cambios a tu rama (`git push origin feature/tu-caracteristica`).
+5. Abre un Pull Request contra la rama `main`.
 
-For larger changes, open an issue first to discuss the approach.
+Para cambios significativos o grandes, por favor abre un Issue primero para discutir tu propuesta.
 
 ---
 
-## License
+## Licencia
 
-Released under the [MIT License](LICENSE). Do whatever you want with it.
+Lanzado bajo la [Licencia MIT](LICENSE). Siéntete libre de hacer lo que desees con el proyecto.
