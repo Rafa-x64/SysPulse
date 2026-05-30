@@ -58,28 +58,70 @@ Select any process in the table and use the bottom toolbar to:
 
 ---
 
-## Getting started
+## Cómo usar la aplicación (Quick Start & Run)
 
-### 1. Clone the repository
+### 📌 Opción 1: Ejecutar directamente (Versión portable para usuarios)
+Si descargaste la versión precompilada (el archivo `.rar` o `.tar.gz` con el bundle compilado), **no necesitas instalar Java ni tener herramientas de desarrollo**. 
 
+> [!IMPORTANT]
+> **Es fundamental mantener toda la estructura de carpetas extraída**. El ejecutable binario depende de las carpetas y archivos internos que se encuentran dentro de `lib/` (incluyendo la máquina virtual embebida y la librería nativa `libsysmetrics.so`).
+
+1. **Extrae el archivo comprimido**:
+   ```bash
+   # Extrae el archivo en tu sistema (ej. SysPulse.rar o SysPulse.tar.gz)
+   unrar x SysPulse.rar
+   # o si es un tar.gz:
+   tar -xzf SysPulse.tar.gz
+   ```
+2. **Entra en el directorio**:
+   ```bash
+   cd SysPulse
+   ```
+3. **Lanza la aplicación**:
+   * **Doble Clic:** Haz doble clic sobre el archivo ejecutable `SysPulse` ubicado dentro de `bin/` usando tu gestor de archivos (Dolphin, Nautilus, etc.).
+   * **Por terminal:**
+     ```bash
+     ./bin/SysPulse
+     ```
+
+---
+
+## 🛠️ Desarrollo y Contribución (Para Desarrolladores)
+
+Si deseas modificar el código fuente, agregar nuevas visualizaciones o características, puedes configurar tu entorno y compilarlo desde cero.
+
+### Requisitos de desarrollo
+* **Java JDK 25** (Se recomienda GraalVM JDK 25 para soporte nativo completo).
+* **Apache Maven 3.9+**.
+* **GCC** (Para compilar la librería nativa en C `sys_metrics.c`).
+
+### 1. Clonar el repositorio
 ```bash
 git clone https://github.com/Rafa-x64/SysPulse.git
 cd SysPulse
 ```
 
-### 2. Build and run
-
-Maven will automatically compile the C native library (`libsysmetrics.so`) before compiling the Java sources.
-
+### 2. Ejecutar en modo desarrollo
+Puedes arrancar la aplicación de inmediato. Maven se encargará de compilar la librería en C (`libsysmetrics.so`), descargar JavaFX, compilar el código Java y lanzar el panel:
 ```bash
 mvn javafx:run
 ```
 
-That is the only command you need. Maven handles everything:
-- Compiles `src/main/c/sys_metrics.c` into `lib/libsysmetrics.so`
-- Downloads JavaFX from Maven Central
-- Compiles the Java sources
-- Launches the application
+### 3. Generar el ejecutable portable (jpackage)
+Para generar el paquete redistribuible (el ejecutable con su propio entorno de ejecución embebido) en la carpeta `dist/`, utiliza el script automatizado que empaqueta la aplicación de forma limpia:
+```bash
+# Dar permisos de ejecución si no los tiene
+chmod +x build-exe.sh
+
+# Compilar y empaquetar
+./build-exe.sh
+```
+
+El bundle autocontenido con todo lo necesario se generará en:
+```
+dist/SysPulse/
+```
+Esta es la carpeta completa que puedes comprimir en `.rar` o `.tar.gz` para compartirla con cualquier usuario de Linux x86_64.
 
 ---
 

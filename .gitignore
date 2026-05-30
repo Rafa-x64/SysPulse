@@ -28,3 +28,6 @@ hs_err_pid*.log
 
 # Runtime natives compiled locally
 lib/libsysmetrics.so
+
+# Distribution build output
+dist/
