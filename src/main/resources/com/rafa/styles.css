@@ -1,0 +1,166 @@
+/* ── Nord Palette ──────────────────────────────────────── */
+/* Polar Night: #2E3440  #3B4252  #434C5E  #4C566A        */
+/* Snow Storm:  #D8DEE9  #E5E9F0  #ECEFF4                  */
+/* Frost:       #8FBCBB  #88C0D0  #81A1C1  #5E81AC         */
+/* Aurora:      #BF616A  #D08770  #EBCB8B  #A3BE8C         */
+
+.root {
+    -fx-font-family: 'Inter', 'Segoe UI', 'Helvetica Neue', sans-serif;
+    -fx-font-size: 13px;
+}
+
+/* ── Layout ──────────────────────────────────────────────── */
+
+.dashboard {
+    -fx-background-color: #2E3440;
+}
+
+.header {
+    -fx-background-color: #3B4252;
+    -fx-padding: 0 24 0 24;
+    -fx-border-color: #434C5E;
+    -fx-border-width: 0 0 1 0;
+    -fx-min-height: 58px;
+    -fx-pref-height: 58px;
+}
+
+.content-area {
+    -fx-padding: 24;
+    -fx-background-color: #2E3440;
+}
+
+/* ── Card ────────────────────────────────────────────────── */
+
+.card {
+    -fx-background-color: #3B4252;
+    -fx-background-radius: 12;
+    -fx-padding: 16;
+    -fx-min-height: 140px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 16, 0, 0, 4);
+}
+
+/* ── Typography ──────────────────────────────────────────── */
+
+.app-title {
+    -fx-text-fill: #ECEFF4;
+    -fx-font-size: 16px;
+    -fx-font-weight: 600;
+}
+
+.live-badge {
+    -fx-text-fill: #A3BE8C;
+    -fx-font-size: 11px;
+    -fx-font-weight: 700;
+}
+
+.metric-value-small {
+    -fx-text-fill: #88C0D0;
+    -fx-font-size: 32px;
+    -fx-font-weight: 300;
+}
+
+.metric-label {
+    -fx-text-fill: #4C566A;
+    -fx-font-size: 10px;
+    -fx-font-weight: 700;
+}
+
+/* ── TableView ───────────────────────────────────────────── */
+
+.process-table {
+    -fx-background-color: transparent;
+    -fx-border-color: #434C5E;
+    -fx-border-radius: 8;
+    -fx-border-width: 1;
+}
+
+.process-table .column-header-background {
+    -fx-background-color: #3B4252;
+    -fx-background-radius: 8 8 0 0;
+}
+
+.process-table .column-header {
+    -fx-background-color: transparent;
+}
+
+.process-table .column-header .label {
+    -fx-text-fill: #D8DEE9;
+    -fx-font-weight: bold;
+}
+
+.process-table .table-row-cell {
+    -fx-background-color: #2E3440;
+    -fx-text-fill: #ECEFF4;
+    -fx-cell-size: 32px;
+}
+
+.process-table .table-row-cell:odd {
+    -fx-background-color: #333946;
+}
+
+.process-table .table-row-cell:selected {
+    -fx-background-color: #4C566A;
+}
+
+.process-table .table-cell {
+    -fx-text-fill: #ECEFF4;
+    -fx-border-width: 0;
+}
+
+.process-table .filler, .process-table .corner {
+    -fx-background-color: #3B4252;
+}
+
+.scroll-bar:vertical, .scroll-bar:horizontal {
+    -fx-background-color: #2E3440;
+}
+.scroll-bar .thumb {
+    -fx-background-color: #4C566A;
+    -fx-background-radius: 4;
+}
+.scroll-bar .track {
+    -fx-background-color: #2E3440;
+}
+
+/* ── Bottom Menu ─────────────────────────────────────────── */
+
+.bottom-menu {
+    -fx-background-color: #2E3440;
+    -fx-padding: 12 24 12 24;
+    -fx-border-color: #434C5E;
+    -fx-border-width: 1 0 0 0;
+}
+
+.menu-btn {
+    -fx-text-fill: #D8DEE9;
+    -fx-background-color: #3B4252;
+    -fx-padding: 4 12;
+    -fx-background-radius: 6;
+    -fx-cursor: hand;
+    -fx-font-weight: 600;
+}
+
+.menu-text {
+    -fx-text-fill: #81A1C1;
+    -fx-font-weight: bold;
+}
+
+/* ── ProgressBar ─────────────────────────────────────────── */
+
+.metric-bar {
+    -fx-pref-height: 8px;
+    -fx-min-height: 8px;
+}
+
+.metric-bar .track {
+    -fx-background-color: #2E3440;
+    -fx-background-radius: 4;
+    -fx-border-color: #434C5E;
+    -fx-border-radius: 4;
+}
+
+.metric-bar .bar {
+    -fx-background-color: linear-gradient(to right, #81A1C1, #88C0D0);
+    -fx-background-radius: 4;
+    -fx-padding: 4px;
+}

@@ -1,0 +1,11 @@
+/srv/http/SysPulse/src/main/java/com/rafa/App.java
+/srv/http/SysPulse/src/main/java/com/rafa/bridge/SystemBridge.java
+/srv/http/SysPulse/src/main/java/com/rafa/model/CpuSnapshot.java
+/srv/http/SysPulse/src/main/java/com/rafa/model/ProcessSnapshot.java
+/srv/http/SysPulse/src/main/java/com/rafa/model/RawCpuTimes.java
+/srv/http/SysPulse/src/main/java/com/rafa/model/SystemMetrics.java
+/srv/http/SysPulse/src/main/java/com/rafa/service/SystemMonitorService.java
+/srv/http/SysPulse/src/main/java/com/rafa/view/CpuChartCanvas.java
+/srv/http/SysPulse/src/main/java/com/rafa/view/DashboardView.java
+/srv/http/SysPulse/src/main/java/com/rafa/viewmodel/DashboardViewModel.java
+/srv/http/SysPulse/src/main/java/module-info.java

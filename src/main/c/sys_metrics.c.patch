@@ -1,0 +1,32 @@
+--- /srv/http/SysPulse/src/main/c/sys_metrics.c
++++ /srv/http/SysPulse/src/main/c/sys_metrics.c
+@@ -53,6 +53,30 @@
+     }
+ }
+ 
++// --- DISK IO ---
++long read_disk_io_ticks() {
++    FILE *f = fopen("/proc/diskstats", "r");
++    if (!f) return 0;
++    
++    char buf[256];
++    long max_ticks = 0;
++    while (fgets(buf, sizeof(buf), f)) {
++        int major, minor;
++        char name[32];
++        long f0, f1, f2, f3, f4, f5, f6, f7, f8, io_ticks;
++        
++        if (sscanf(buf, "%d %d %31s %ld %ld %ld %ld %ld %ld %ld %ld %ld %ld",
++                   &major, &minor, name, 
++                   &f0, &f1, &f2, &f3, &f4, &f5, &f6, &f7, &f8, &io_ticks) == 13) {
++            if (strncmp(name, "loop", 4) == 0 || strncmp(name, "ram", 3) == 0) continue;
++            if (io_ticks > max_ticks) max_ticks = io_ticks;
++        }
++    }
++    fclose(f);
++    return max_ticks;
++}
++
+ // --- GPU ---
+ // Try AMD gpu_busy_percent, then Intel frequency-based estimate.
+ // Tries card0 through card3. Returns -1.0 if no GPU data is available.

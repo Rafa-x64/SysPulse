@@ -1,0 +1,11 @@
+com/rafa/bridge/SystemBridge.class
+com/rafa/model/ProcessSnapshot.class
+com/rafa/model/RawCpuTimes.class
+module-info.class
+com/rafa/App.class
+com/rafa/viewmodel/DashboardViewModel.class
+com/rafa/service/SystemMonitorService.class
+com/rafa/model/CpuSnapshot.class
+com/rafa/view/CpuChartCanvas.class
+com/rafa/model/SystemMetrics.class
+com/rafa/view/DashboardView.class
